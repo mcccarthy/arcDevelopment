@@ -58,6 +58,18 @@ const useStyles = makeStyles((theme) => ({
 		padding: '30px 30px',
 		fontWeight: 'bold',
 		boxShadow: '0px 11px 15px rgba(0, 0, 0, 0.65)'
+	},
+
+	menu: {
+		backgroundColor: theme.palette.common.blue,
+		color: 'white'
+	},
+	menuItem: {
+		...theme.typography.tab,
+		opacity: 0.7,
+		'&:hover': {
+			opacity: 1
+		}
 	}
 }));
 
@@ -66,6 +78,7 @@ export default function Header(props) {
 	const [value, setValue] = useState(0);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [open, setOpen] = useState(false);
+	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	const handleChange = (e, value) => {
 		setValue(value);
@@ -76,30 +89,75 @@ export default function Header(props) {
 		setOpen(true);
 	};
 
+	const handleMenuItemClick = (e, i) => {
+		setAnchorEl(null);
+		setOpen(false);
+		setSelectedIndex(i);
+	};
+
 	const handleClose = () => {
 		setAnchorEl(null);
 		setOpen(false);
 	};
 
+	const menuOptions = [
+		{ name: 'Services', link: '/services' },
+		{ name: 'Custom Software Development', link: '/customsoftware' },
+		{ name: 'Mobile App Development', link: '/mobileapps' },
+		{ name: 'Website Development', link: '/websites' }
+	];
+
 	useEffect(() => {
 		switch (window.location.pathname) {
 			case '/':
-				setValue(0);
+				if (value !== 0) {
+					setValue(0);
+				}
 				break;
 			case '/services':
-				setValue(1);
+				if (value !== 1) {
+					setValue(1);
+					setSelectedIndex(0);
+				}
+				break;
+			case '/customsoftware':
+				if (value !== 1) {
+					setValue(1);
+					setSelectedIndex(1);
+				}
+				break;
+			case '/mobileapps': {
+				if (value !== 1) {
+					setValue(1);
+					setSelectedIndex(2);
+				}
+				break;
+			}
+			case '/websites':
+				if (value !== 1) {
+					setValue(1);
+					setSelectedIndex(3);
+				}
 				break;
 			case '/revolution':
-				setValue(2);
+				if (value !== 2) {
+					setValue(2);
+				}
 				break;
 			case '/about':
-				setValue(3);
+				if (value !== 3) {
+					setValue(3);
+				}
 				break;
 			case '/contact':
-				setValue(4);
+				if (value !== 4) {
+					setValue(4);
+				}
 				break;
 			case '/estimate':
-				setValue(5);
+				if (value !== 5) {
+					setValue(5);
+				}
 				break;
 			default:
 				break;
@@ -135,6 +193,7 @@ export default function Header(props) {
 								label='Home'
 							/>
 							<Tab
+								// eslint-disable-next-line jsx-a11y/aria-props
 								aria-ownes={anchorEl ? 'simple-menu' : undefined}
 								aria-haspopup={anchorEl ? 'true' : undefined}
 								onMouseOver={(e) => handleClick(e)}
@@ -172,46 +231,27 @@ export default function Header(props) {
 						</Button>
 						<Menu
 							id='simple-menu'
+							classes={{ paper: classes.menu }}
 							anchorEl={anchorEl}
 							open={open}
 							onClose={handleClose}
-							MenuListProps={{ onMouseLeave: handleClose }}>
-							<MenuItem
-								onClick={() => {
-									handleClose();
-									setValue(1);
-								}}
-								component={Link}
-								to='/services'>
-								Services
-							</MenuItem>
-							<MenuItem
-								onClick={() => {
-									handleClose();
-									setValue(1);
-								}}
-								component={Link}
-								to='/customsoftware'>
-								Custom Software Development
-							</MenuItem>
-							<MenuItem
-								onClick={() => {
-									handleClose();
-									setValue(1);
-								}}
-								component={Link}
-								to='/mobileapps'>
-								Mobile App Development
-							</MenuItem>
-							<MenuItem
-								onClick={() => {
-									handleClose();
-									setValue(1);
-								}}
-								component={Link}
-								to='/websites'>
-								Website Development
-							</MenuItem>
+							MenuListProps={{ onMouseLeave: handleClose }}
+							elevation={0}>
+							{menuOptions.map((option, i) => (
+								<MenuItem
+									key={option + 1}
+									classes={{ root: classes.menuItem }}
+									component={Link}
+									to={option.link}
+									selected={i === selectedIndex && value === 1}
+									onClick={(event) => {
+										handleMenuItemClick(event, i);
+										setValue(1);
+										handleClose();
+									}}>
+									{option.name}
+								</MenuItem>
+							))}
 						</Menu>
 					</Toolbar>
 				</AppBar>
