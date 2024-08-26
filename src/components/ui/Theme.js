@@ -1,3 +1,4 @@
+import { colors } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const arcBlue = '#0B72B9';
@@ -18,8 +19,18 @@ export default createMuiTheme({
 	},
 	typography: {
 		fontFamily: "'Fira Code', Helvetica, Arial, sans-serif",
-		h3: {
-			fontWeight: 300
+		tab: {
+			fontFamily: '"Fira Code", monospace',
+			textTransform: 'none',
+			fontWeight: 700,
+			fontSize: '1rem'
+		},
+		estimate: {
+			fontFamily: 'Italianno',
+			fontSize: '1.8rem',
+			textTransform: 'none',
+			color: 'white',
+			letterSpacing: '5px'
 		}
 	}
 });
