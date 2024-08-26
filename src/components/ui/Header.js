@@ -1,13 +1,7 @@
-import React from 'react';
-import { AppBar, useScrollTrigger } from '@material-ui/core';
-import Toolbar from '@material-ui/core/Toolbar';
+import React, { useEffect, useState } from 'react';
+import { AppBar, useScrollTrigger, Toolbar, Tabs, Tab, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Button from '@material-ui/core/Button';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import logo from '../../assets/logo.svg';
 
 function ElevationScroll(props) {
@@ -31,6 +25,20 @@ const useStyles = makeStyles((theme) => ({
 	logo: {
 		height: '7em'
 	},
+	logoContainer: {
+		padding: 0, // Remove padding from the Button
+		margin: 0, // Remove margin from the Button
+		'& .MuiButton-root': {
+			padding: 0, // Override the root padding
+			minWidth: 'auto'
+		},
+		'& .MuiButton-text': {
+			padding: 0 // Override the text padding
+		},
+		'&:hover': {
+			backgroundColor: 'transparent'
+		}
+	},
 	tabContainer: {
 		marginLeft: 'auto'
 	},
@@ -46,9 +54,11 @@ const useStyles = makeStyles((theme) => ({
 		...theme.typography.estimate,
 		height: '45px',
 		padding: '30px 30px',
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		boxShadow: '0px 11px 15px rgba(0, 0, 0, 0.65)'
 	}
 }));
+
 export default function Header(props) {
 	const classes = useStyles();
 	const [value, setValue] = useState(0);
@@ -56,16 +66,49 @@ export default function Header(props) {
 	const handleChange = (e, value) => {
 		setValue(value);
 	};
+
+	useEffect(() => {
+		switch (window.location.pathname) {
+			case '/':
+				setValue(0);
+				break;
+			case '/services':
+				setValue(1);
+				break;
+			case '/revolution':
+				setValue(2);
+				break;
+			case '/about':
+				setValue(3);
+				break;
+			case '/contact':
+				setValue(4);
+				break;
+			case '/estimate':
+				setValue(5);
+				break;
+			default:
+				break;
+		}
+	}, [value]);
+
 	return (
 		<>
 			<ElevationScroll>
 				<AppBar position='fixed'>
 					<Toolbar disableGutters>
-						<img
-							src={logo}
-							alt='logo'
-							className={classes.logo}
-						/>
+						<Button
+							onClick={() => setValue(0)}
+							component={Link}
+							to='/'
+							className={classes.logoContainer}
+							disableRipple>
+							<img
+								src={logo}
+								alt='logo'
+								className={classes.logo}
+							/>
+						</Button>
 						<Tabs
 							value={value}
 							onChange={handleChange}
@@ -96,9 +139,9 @@ export default function Header(props) {
 								label='About Us'
 							/>
 							<Tab
-								className={classes.tab}
 								component={Link}
 								to='/contact'
+								className={classes.tab}
 								label='Contact Us'
 							/>
 						</Tabs>
