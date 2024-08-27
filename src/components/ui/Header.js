@@ -107,10 +107,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 	drawerItem: {
 		...theme.typography.tab,
-		color: 'white'
+		color: 'white',
+		opacity: 0.7
 	},
 	drawerItemEstimate: {
 		backgroundColor: theme.palette.common.orange
+	},
+	drawerItemSelected: {
+		opacity: 1
 	}
 }));
 
@@ -310,7 +314,9 @@ export default function Header(props) {
 						to={'/'}
 						selected={value === 0}>
 						<ListItemText
-							className={classes.drawerItem}
+							className={
+								value === 0 ? [classes.drawerItemSelected, classes.drawerItem] : classes.drawerItem
+							}
 							disableTypography>
 							Home
 						</ListItemText>
@@ -326,7 +332,9 @@ export default function Header(props) {
 						component={Link}
 						to={'/services'}>
 						<ListItemText
-							className={classes.drawerItem}
+							className={
+								value === 1 ? [classes.drawerItemSelected, classes.drawerItem] : classes.drawerItem
+							}
 							disableTypography>
 							Services
 						</ListItemText>
@@ -342,7 +350,9 @@ export default function Header(props) {
 						component={Link}
 						to={'/revolution'}>
 						<ListItemText
-							className={classes.drawerItem}
+							className={
+								value === 2 ? [classes.drawerItemSelected, classes.drawerItem] : classes.drawerItem
+							}
 							disableTypography>
 							The Revolution
 						</ListItemText>
@@ -358,7 +368,9 @@ export default function Header(props) {
 						component={Link}
 						to={'/about'}>
 						<ListItemText
-							className={classes.drawerItem}
+							className={
+								value === 3 ? [classes.drawerItemSelected, classes.drawerItem] : classes.drawerItem
+							}
 							disableTypography>
 							About Us
 						</ListItemText>
@@ -374,7 +386,9 @@ export default function Header(props) {
 						component={Link}
 						to={'/contact'}>
 						<ListItemText
-							className={classes.drawerItem}
+							className={
+								value === 4 ? [classes.drawerItemSelected, classes.drawerItem] : classes.drawerItem
+							}
 							disableTypography>
 							Contact Us
 						</ListItemText>
@@ -391,7 +405,9 @@ export default function Header(props) {
 						component={Link}
 						to={'/freeestimate'}>
 						<ListItemText
-							className={classes.drawerItem}
+							className={
+								value === 5 ? [classes.drawerItemSelected, classes.drawerItem] : classes.drawerItem
+							}
 							disableTypography>
 							Free Estimate
 						</ListItemText>
