@@ -29,12 +29,12 @@ function ElevationScroll(props) {
 const useStyles = makeStyles((theme) => ({
 	toolbarMargin: {
 		...theme.mixins.toolbar,
-		marginBottom: '3em',
+		marginBottom: '4em',
 		[theme.breakpoints.down('md')]: {
-			marginBottom: '3em'
+			marginBottom: '2em'
 		},
 		[theme.breakpoints.down('xs')]: {
-			marginBottom: '2em'
+			marginBottom: '1em'
 		}
 	},
 	logo: {
@@ -238,7 +238,7 @@ export default function Header(props) {
 				keepMounted>
 				{menuOptions.map((option, i) => (
 					<MenuItem
-						key={option + 1}
+						key={`${option}${i}`}
 						classes={{ root: classes.menuItem }}
 						component={Link}
 						to={option.link}
