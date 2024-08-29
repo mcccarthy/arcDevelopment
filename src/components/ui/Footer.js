@@ -45,6 +45,18 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('xs')]: {
 			height: '2.5em',
 			width: '2.5em',
+			[theme.breakpoints.down('xs')]: {
+				height: '2.5em',
+				width: '2.5em',
+			},
+		},
+	},
+	socialContainer: {
+		position: 'absolute',
+		marginTop: '-6em',
+		right: '1.5em',
+		[theme.breakpoints.down('xs')]: {
+			right: '0.6em',
 		},
 	},
 }));
@@ -210,7 +222,7 @@ export default function Footer(props) {
 
 			<img src={footerAdornment} className={classes.adornment} alt='footer image' />
 
-			<Grid container>
+			<Grid container spacing={2} justify='flex-end' className={classes.socialContainer}>
 				<Grid item component={'a'} href='https://www.facebook.com' rel='noopener noreferrer' target='_blank'>
 					<img alt='facebook logo' src={facebook} className={classes.icon} />
 				</Grid>
