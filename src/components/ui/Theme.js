@@ -7,14 +7,14 @@ export default createMuiTheme({
 	palette: {
 		common: {
 			blue: `${arcBlue}`,
-			orange: `${arcOrange}`
+			orange: `${arcOrange}`,
 		},
 		primary: {
-			main: `${arcBlue}`
+			main: `${arcBlue}`,
 		},
 		secondary: {
-			main: `${arcOrange}`
-		}
+			main: `${arcOrange}`,
+		},
 	},
 	typography: {
 		fontFamily: "'Fira Code', Helvetica, Arial, sans-serif",
@@ -22,14 +22,15 @@ export default createMuiTheme({
 			fontFamily: '"Fira Code", monospace',
 			textTransform: 'none',
 			fontWeight: 700,
-			fontSize: '1rem'
+			fontSize: '1rem',
 		},
 		estimate: {
 			fontFamily: 'Italianno',
-			fontSize: '1.8rem',
+			fontSize: '1.4rem',
 			textTransform: 'none',
 			color: 'white',
-			letterSpacing: '5px'
-		}
-	}
+			letterSpacing: '4.32px',
+			width: '270px',
+		},
+	},
 });

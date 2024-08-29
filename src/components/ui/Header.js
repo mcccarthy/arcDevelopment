@@ -77,6 +77,9 @@ const useStyles = makeStyles(theme => ({
 		padding: '30px 30px',
 		fontWeight: 'bold',
 		boxShadow: '0px 11px 15px rgba(0, 0, 0, 0.65)',
+		[theme.breakpoints.down('lg')]: {
+			height: '15px',
+		},
 	},
 
 	menu: {
